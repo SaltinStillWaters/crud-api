@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     protected function index() {
-        return response()->json(Product::get());
+        return response()->json(Product::select('id', 'name', 'price', 'quantity')->get());
     }
 
     protected function create(CreateProductRequest $req) {

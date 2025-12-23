@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,5 @@ Route::get('/products/{product}', [ProductController::class, 'show']);
 Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 Route::patch('/products/{product}', [ProductController::class, 'update']);
 Route::post('/products', [ProductController::class, 'create']);
+
+Route::post('/login', [LoginController::class, 'authenticate']);
