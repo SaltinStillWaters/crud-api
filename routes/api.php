@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{product}', [ProductController::class, 'show']);
-Route::delete('/products/{product}', [ProductController::class, 'destroy']);
-Route::patch('/products/{product}', [ProductController::class, 'update']);
-Route::post('/products', [ProductController::class, 'create']);
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{product}', [ProductController::class, 'show']);
+    Route::delete('/{product}', [ProductController::class, 'destroy']);
+    Route::patch('/{product}', [ProductController::class, 'update']);
+    Route::post('/', [ProductController::class, 'create']);
+});
 
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::prefix('/auth')->group(function (){
+    Route::post('/login', [AuthController::class, 'authenticate']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
