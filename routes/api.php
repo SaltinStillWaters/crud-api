@@ -31,4 +31,5 @@ Route::prefix('products')->group(function () {
 Route::prefix('/auth')->group(function (){
     Route::post('/login', [AuthController::class, 'authenticate']);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
